@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Restaurant.Application.Restaurants.Command.CreateRestaurant;
+using Restaurant.Application.Restaurants.Command.UpdateRestaurant;
 using Restaurant.Domain.Entities;
 
 namespace Restaurant.Application.Restaurants.Dtos;
@@ -7,6 +8,10 @@ public class RestaurantsProfile : Profile // Profile Define Dari Auto Mapper
  {
     public RestaurantsProfile() 
     {
+
+        //Mapping Update Data
+        CreateMap<UpdateRestaurantCommand, Restaurantz>();
+
         // Mapping For Request / Post Data | Dto -> Database
         CreateMap<CreateRestaurantCommand, Restaurantz>()
            .ForMember(d => d.Address, opt => opt.MapFrom(

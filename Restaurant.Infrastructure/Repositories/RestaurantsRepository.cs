@@ -33,7 +33,7 @@ public class RestaurantsRepository(RestaurantDbContext dbContext) : IRestaurants
         return entity.Id;
     }
 
-
+    public async Task SaveChanges() => dbContext.SaveChangesAsync();
 
     public async Task Delete(Restaurantz entity)
     {
@@ -41,32 +41,32 @@ public class RestaurantsRepository(RestaurantDbContext dbContext) : IRestaurants
         dbContext.SaveChanges();
     }
 
-    public async Task<Restaurantz> UpdateAsync(int id, Restaurantz updatedRestaurant)
-    {
-        // Ambil data restoran yang ada berdasarkan ID
-        var existingRestaurant = await dbContext.Restaurants
-            .Include(r => r.Address)
-            .Include(r => r.Dishes)
-            .SingleOrDefaultAsync(x => x.Id == id);
+    //public async Task<Restaurantz> UpdateAsync(int id, Restaurantz updatedRestaurant)
+    //{
+    //    // Ambil data restoran yang ada berdasarkan ID
+    //    var existingRestaurant = await dbContext.Restaurants
+    //        .Include(r => r.Address)
+    //        .Include(r => r.Dishes)
+    //        .SingleOrDefaultAsync(x => x.Id == id);
 
-        if (existingRestaurant == null)
-        {
-            // Jika restoran tidak ditemukan, bisa throw exception atau return null
-            throw new KeyNotFoundException($"Restaurant with Id {id} not found.");
-        }
+    //    if (existingRestaurant == null)
+    //    {
+    //        // Jika restoran tidak ditemukan, bisa throw exception atau return null
+    //        throw new KeyNotFoundException($"Restaurant with Id {id} not found.");
+    //    }
 
-        // Update properti dari restoran yang ada dengan data yang di-update
-        existingRestaurant.Name = updatedRestaurant.Name;
-        existingRestaurant.Description = updatedRestaurant.Description;
-        existingRestaurant.Address = updatedRestaurant.Address;
-        existingRestaurant.Dishes = updatedRestaurant.Dishes;
-        // Jika ada properti lain yang perlu diupdate, bisa ditambahkan di sini
+    //    // Update properti dari restoran yang ada dengan data yang di-update
+    //    existingRestaurant.Name = updatedRestaurant.Name;
+    //    existingRestaurant.Description = updatedRestaurant.Description;
+    //    existingRestaurant.Address = updatedRestaurant.Address;
+    //    existingRestaurant.Dishes = updatedRestaurant.Dishes;
+    //    // Jika ada properti lain yang perlu diupdate, bisa ditambahkan di sini
 
-        // Save perubahan ke database
-        dbContext.Restaurants.Update(existingRestaurant);
-        await dbContext.SaveChangesAsync();
+    //    // Save perubahan ke database
+    //    dbContext.Restaurants.Update(existingRestaurant);
+    //    await dbContext.SaveChangesAsync();
 
-        return existingRestaurant;
-    }
+    //    return existingRestaurant;
+    //}
 }
 
