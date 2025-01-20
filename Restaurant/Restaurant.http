@@ -1,0 +1,17 @@
+@Restaurant_HostAddress = https://localhost:7267
+
+###
+
+GET {{Restaurant_HostAddress}}/api/restaurants
+
+###
+
+@id=0
+GET {{Restaurant_HostAddress}}/api/restaurants/{{id}}
+
+###
+POST {{Restaurant_HostAddress}}/api/restaurants
+Content-Type: application/json
+{
+
+}
